@@ -14,18 +14,18 @@ from matplotlib.backends.backend_wxagg import NavigationToolbar2WxAgg as Navigat
 from new_data import DataFrame
 
 COLORS = (
-            wx.Color(254, 0, 0), # ch00
-            wx.Color(252, 127, 128), # ch01
-            wx.Color(0, 253, 0), # ch02
-            wx.Color(128, 253, 128), # ch03
-            wx.Color(253, 253, 0), # ch04
-            wx.Color(253, 253, 127), # ch05
-            wx.Color(127, 126, 252), # ch06
-            wx.Color(180, 180, 253), # ch07
-            wx.Color(199, 199, 199), # ch08
-            wx.Color(253, 169, 0), # ch09
-            wx.Color(84, 168, 252), # ch10
-            wx.Color(252, 126, 253),# ch11
+            wx.Colour(254, 0, 0), # ch00
+            wx.Colour(252, 127, 128), # ch01
+            wx.Colour(0, 253, 0), # ch02
+            wx.Colour(128, 253, 128), # ch03
+            wx.Colour(253, 253, 0), # ch04
+            wx.Colour(253, 253, 127), # ch05
+            wx.Colour(127, 126, 252), # ch06
+            wx.Colour(180, 180, 253), # ch07
+            wx.Colour(199, 199, 199), # ch08
+            wx.Colour(253, 169, 0), # ch09
+            wx.Colour(84, 168, 252), # ch10
+            wx.Colour(252, 126, 253),# ch11
         )
 DEFAULT_BINNING = 1
 DEFAULT_PLOT_RANGE = 600
@@ -471,7 +471,7 @@ class MiniMapPanel(wx.Panel):
         self.fig.subplots_adjust(left=0.05, right=0.97, bottom=0.16, top=0.93)
 
         self.axes = self.fig.add_subplot(111)
-        self.axes.set_axis_bgcolor('black')
+        self.axes.set_facecolor('black')
         
         pylab.setp(self.axes.get_xticklabels(), fontsize=8)
         pylab.setp(self.axes.get_yticklabels(), fontsize=8)
@@ -544,7 +544,7 @@ class MainFrame(wx.Frame):
         self.fig.subplots_adjust(left=0.05, right=0.97, bottom=0.05, top=0.95)
 
         self.axes = self.fig.add_subplot(111)
-        self.axes.set_axis_bgcolor('black')
+        self.axes.set_facecolor('black')
         
         pylab.setp(self.axes.get_xticklabels(), fontsize=8)
         pylab.setp(self.axes.get_yticklabels(), fontsize=8)
@@ -592,13 +592,14 @@ class MainFrame(wx.Frame):
         if plot_start is None:
             plot_start = mi
 
+          
         plot_start -= DEFAULT_PLOT_RANGE / 2 
         plot_end = plot_start + DEFAULT_PLOT_RANGE
 
-        data_start = plot_start - mi
+        data_start = int(plot_start - mi)
         if data_start < 0:
             data_start = 0
-        data_end = plot_end - mi
+        data_end = int(plot_end - mi)
 
         channels = self.data_frame.channels.values()
 
